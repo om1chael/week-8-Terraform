@@ -67,10 +67,10 @@ resource "aws_instance" "app_instance" {
 Bash command: `terraform plan` this will check the syntax of the script  
 
 
-
-# step 1 create vpc with CDIR block
-# run terraform plan then terraform apply 
-# get the vpc id from aws or terraform logs
+## Steps
+- step 1 create vpc with CDIR block
+- run terraform plan then terraform apply 
+- get the vpc id from aws or terraform logs
 
 
 ## creating the internet gateway
