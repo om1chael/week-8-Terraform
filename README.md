@@ -1,8 +1,9 @@
 # Week 8 Terraform:
-## What is is ?
-## why is it used ?
-## Setting up Terraforming 
-## Securing AWS Keys for Terraforming 
+Questions: 
+- What is is ?
+- why is it used ?
+- Setting up Terraforming 
+- Securing AWS Keys for Terraforming 
 
 
 
@@ -39,18 +40,12 @@ All other commands:
 ```
 
 Terraform:
-code will dynamically add chnages 
-
-
+code will dynamically add chanages, but first create the instace first  using `terraform init`, Then wait.
+```
 provider "aws"{
 region = "eu-west-1
-
 }
-Bash command: terraform init 
 ```
-lets run this code with `terraform init`
-### You will have to wait
-
 
 ### Create resources on AWS
 - lets start launching EC2 inatnces using the app AMI
@@ -59,15 +54,15 @@ lets run this code with `terraform init`
 - public ip 
 - instance type configuration
 
-````
+```
 resource "aws_instance" "app_instance" {
   ami = "ami-00e8ddf087865b27f"
   instance_type= "t2.micro"
   associate_public_ip_address = true
   tags = {
      Name = "SRE_Michael_Terraform_app"
-
   }
 }
-Bash command: terraform plan
 ```
+Bash command: `terraform plan`
+
