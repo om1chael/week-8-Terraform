@@ -5,6 +5,7 @@ Questions:
 - Setting up Terraforming 
 - Securing AWS Keys for Terraforming 
 
+![image](https://user-images.githubusercontent.com/17476059/133597186-f0432314-9f30-450b-8684-4f9c24b814b1.png)
 
 
 Main commands:
