@@ -168,10 +168,6 @@ type `terraform build` to create the instance
 
 
 
-# step 1 create vpc with CDIR block
-# run terraform plan then terraform apply 
-# get the vpc id from aws or terraform logs
-
 
 ## creating the internet gateway
 ```
@@ -267,7 +263,7 @@ connection {
 type `terraform build` to create the instance
 
 
-
+____
 ## Creating the BD instance:
 ### Tasks:
 - Create DB private Subnet
