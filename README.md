@@ -65,7 +65,6 @@ resource "aws_instance" "app_instance" {
 }
 ```
 Bash command: `terraform plan` this will check the syntax of the script  
-<<<<<<< HEAD
 
 
 ## Steps
@@ -365,3 +364,4 @@ connection {
 } 
 
 ```
+# Configure Load Balancing and Auto Scaling
