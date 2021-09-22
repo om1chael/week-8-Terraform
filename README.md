@@ -6,6 +6,11 @@ Questions:
 - Securing AWS Keys for Terraforming 
 
 ![image](https://user-images.githubusercontent.com/17476059/133597186-f0432314-9f30-450b-8684-4f9c24b814b1.png)
+## What is it?
+Terraform allows infrastructure to be expressed as code in a simple language. It reads configuration files and provides an execution plan of changes, which can be reviewed for safety and then applied and provisioned.
+
+## why is it used ?
+It manages the entire lifecycle of infrastructure using infrastructure as code.
 
 Main commands:
 
