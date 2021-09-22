@@ -366,3 +366,86 @@ connection {
 
 ```
 # Configure Load Balancing and Auto Scaling
+
+
+
+resource "aws_launch_configuration" "app_launch_configuration" {
+    name = "sre_michael_app_launch_configuration"
+    image_id = "ami-017c50d19cfa761b0"
+    instance_type = "t2.micro"
+}
+
+## Loadbalancer
+resource "aws_lb" "sre-michael-tf-LBB" {
+    name = "sre-michael-LB"
+    internal = false
+    load_balancer_type = "application"
+    enable_deletion_protection = true
+    security_groups    = [aws_security_group.App_sg.id]
+    subnets = [
+        
+        #var.subnet_app
+        aws_subnet.public_subnet.id
+        ,
+        aws_subnet.private.id
+        #var.subnet_db
+    ]
+
+    tags = {
+        Name = "sre-michael-tf-LBB"
+    }
+}
+
+
+resource "aws_lb_target_group" "sre_michael_tf_TG" {
+    name = "sre-michael-app-tf-TG"
+    port = 80
+    protocol = "HTTP"
+    vpc_id = aws_vpc.main.id
+    
+    tags = {
+        Name = "sre_michael_tf_TG"
+    }
+}
+
+resource "aws_autoscaling_group" "sre_michael_tf_ASG" {
+    name = "sre_michael_tf_ASG"
+    min_size = 1
+    desired_capacity = 1
+    max_size = 3
+    vpc_zone_identifier = [
+        
+        aws_subnet.public_subnet.id,
+        aws_subnet.private.id
+    ]
+
+    launch_configuration = aws_launch_configuration.app_launch_configuration.name
+}
+
+resource "aws_lb_listener" "sre_michael_tf_listener" {
+  load_balancer_arn = aws_lb.sre-michael-tf-LBB.arn
+  port              = "8080"
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.sre_michael_tf_TG.arn
+  }
+}
+
+
+resource "aws_autoscaling_policy" "app_ASG_policy" {
+    name = "sre_michael_app_ASG_policy"
+    policy_type = "TargetTrackingScaling"
+    estimated_instance_warmup = 100
+    autoscaling_group_name = aws_autoscaling_group.sre_michael_tf_ASG.name
+
+    target_tracking_configuration {
+        predefined_metric_specification {
+            predefined_metric_type = "ASGAverageCPUUtilization"
+        }
+        target_value = 50.0
+    }
+    }
+
+
+
