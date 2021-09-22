@@ -368,14 +368,15 @@ connection {
 # Configure Load Balancing and Auto Scaling
 
 
-
+```
 resource "aws_launch_configuration" "app_launch_configuration" {
     name = "sre_michael_app_launch_configuration"
     image_id = "ami-017c50d19cfa761b0"
     instance_type = "t2.micro"
 }
-
+```
 ## Loadbalancer
+```
 resource "aws_lb" "sre-michael-tf-LBB" {
     name = "sre-michael-LB"
     internal = false
@@ -395,8 +396,9 @@ resource "aws_lb" "sre-michael-tf-LBB" {
         Name = "sre-michael-tf-LBB"
     }
 }
-
-
+```
+## Target group
+```
 resource "aws_lb_target_group" "sre_michael_tf_TG" {
     name = "sre-michael-app-tf-TG"
     port = 80
@@ -407,7 +409,9 @@ resource "aws_lb_target_group" "sre_michael_tf_TG" {
         Name = "sre_michael_tf_TG"
     }
 }
-
+```
+## Autoscaling group
+```
 resource "aws_autoscaling_group" "sre_michael_tf_ASG" {
     name = "sre_michael_tf_ASG"
     min_size = 1
@@ -421,7 +425,9 @@ resource "aws_autoscaling_group" "sre_michael_tf_ASG" {
 
     launch_configuration = aws_launch_configuration.app_launch_configuration.name
 }
-
+```
+## Load balancer
+```
 resource "aws_lb_listener" "sre_michael_tf_listener" {
   load_balancer_arn = aws_lb.sre-michael-tf-LBB.arn
   port              = "8080"
@@ -431,8 +437,9 @@ resource "aws_lb_listener" "sre_michael_tf_listener" {
     target_group_arn = aws_lb_target_group.sre_michael_tf_TG.arn
   }
 }
-
-
+```
+## Autoscaling policy
+```
 resource "aws_autoscaling_policy" "app_ASG_policy" {
     name = "sre_michael_app_ASG_policy"
     policy_type = "TargetTrackingScaling"
@@ -447,5 +454,5 @@ resource "aws_autoscaling_policy" "app_ASG_policy" {
     }
     }
 
-
+```
 
