@@ -12,7 +12,7 @@ Terraform allows infrastructure to be expressed as code in a simple language. It
 ## why is it used ?
 It manages the entire lifecycle of infrastructure using infrastructure as code.
 
-Main commands:
+## Main commands:
 
 ```
 Main commands:
